@@ -43,6 +43,7 @@ func TestSetLevel(t *testing.T) {
 func TestConverter(t *testing.T) {
 	Info("String")
 	Info("String " + "String2 " + "String3")
+	Info(true)
 	Info(100)
 	Info([]int{1, 2, 3})
 	Info([]string{"a", "b", "c"})
@@ -54,4 +55,14 @@ func TestConverter(t *testing.T) {
 		f1: "String",
 		f2: 10,
 	})
+}
+
+func TestFormat(t *testing.T) {
+	//Panicf("%d", 1)
+	//Fatalf("%s", "str")
+	Errorf("%f", 10.0)
+	Warnf("%s", "str")
+	Infof("%d", 10)
+	Debugf("%t", true)
+	Tracef("%p", []int{1, 2, 3})
 }
