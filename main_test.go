@@ -1,4 +1,4 @@
-package toscale_log
+package log
 
 import (
 	"errors"
