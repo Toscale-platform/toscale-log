@@ -1,4 +1,4 @@
-package log
+package logger
 
 import (
 	"fmt"
@@ -7,8 +7,8 @@ import (
 	"os"
 )
 
-func init() {
-	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "02 Jan 15:04:05"}).With().Caller().Logger()
+func GetLogger() zerolog.Logger {
+	return log.Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "02 Jan 15:04:05"}).With().Caller().Logger()
 }
 
 func m(msg interface{}) string {
