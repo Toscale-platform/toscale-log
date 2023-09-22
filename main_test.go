@@ -42,6 +42,7 @@ func TestSetLevel(t *testing.T) {
 
 func TestConverter(t *testing.T) {
 	Info("String")
+	Info("String " + "String2 " + "String3")
 	Info(100)
 	Info([]int{1, 2, 3})
 	Info([]string{"a", "b", "c"})

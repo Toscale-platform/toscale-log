@@ -19,19 +19,19 @@ func SetLevel(l zerolog.Level) {
 	zerolog.SetGlobalLevel(l)
 }
 
-func Panic(msg string) {
+func Panic(msg interface{}) {
 	log.Panic().Msg(m(msg))
 }
 
-func Fatal(msg string) {
+func Fatal(msg interface{}) {
 	log.Fatal().Msg(m(msg))
 }
 
-func Error(msg string) {
+func Error(msg interface{}) {
 	log.Error().Msg(m(msg))
 }
 
-func Warn(msg string) {
+func Warn(msg interface{}) {
 	log.Warn().Msg(m(msg))
 }
 
@@ -39,10 +39,10 @@ func Info(msg interface{}) {
 	log.Info().Msg(m(msg))
 }
 
-func Debug(msg string) {
+func Debug(msg interface{}) {
 	log.Debug().Msg(m(msg))
 }
 
-func Trace(msg string) {
+func Trace(msg interface{}) {
 	log.Trace().Msg(m(msg))
 }
