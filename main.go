@@ -5,6 +5,7 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"os"
+	"runtime"
 )
 
 type Logger struct {
@@ -12,6 +13,14 @@ type Logger struct {
 }
 
 func GetLogger() Logger {
+	zerolog.CallerMarshalFunc = func(_ uintptr, _ string, _ int) string {
+		_, file, line, ok := runtime.Caller(1)
+		if !ok {
+			return ""
+		}
+		return fmt.Sprintf("%s:%d", file, line)
+	}
+
 	return Logger{
 		log.Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "02 Jan 15:04:05"}).With().Caller().Logger(),
 	}
