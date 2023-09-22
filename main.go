@@ -7,70 +7,72 @@ import (
 	"os"
 )
 
-func GetLogger() zerolog.Logger {
-	return log.Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "02 Jan 15:04:05"}).With().Caller().Logger()
+type Logger struct {
+	core zerolog.Logger
+}
+
+func GetLogger() Logger {
+	return Logger{
+		log.Output(zerolog.ConsoleWriter{Out: os.Stdout, TimeFormat: "02 Jan 15:04:05"}).With().Caller().Logger(),
+	}
 }
 
 func m(msg interface{}) string {
 	return fmt.Sprintf("%v", msg)
 }
 
-func SetLevel(l zerolog.Level) {
-	zerolog.SetGlobalLevel(l)
+func (l *Logger) Panic(msg interface{}) {
+	l.core.Panic().Msg(m(msg))
 }
 
-func Panic(msg interface{}) {
-	log.Panic().Msg(m(msg))
+func (l *Logger) Panicf(format string, v ...interface{}) {
+	l.core.Panic().Msgf(format, v...)
 }
 
-func Panicf(format string, v ...interface{}) {
-	log.Panic().Msgf(format, v...)
+func (l *Logger) Fatal(msg interface{}) {
+	l.core.Fatal().Msg(m(msg))
 }
 
-func Fatal(msg interface{}) {
-	log.Fatal().Msg(m(msg))
+func (l *Logger) Fatalf(format string, v ...interface{}) {
+	l.core.Fatal().Msgf(format, v...)
 }
 
-func Fatalf(format string, v ...interface{}) {
-	log.Fatal().Msgf(format, v...)
+func (l *Logger) Error(msg interface{}) {
+	l.core.Error().Msg(m(msg))
 }
 
-func Error(msg interface{}) {
-	log.Error().Msg(m(msg))
+func (l *Logger) Errorf(format string, v ...interface{}) {
+	l.core.Error().Msgf(format, v...)
 }
 
-func Errorf(format string, v ...interface{}) {
-	log.Error().Msgf(format, v...)
+func (l *Logger) Warn(msg interface{}) {
+	l.core.Warn().Msg(m(msg))
 }
 
-func Warn(msg interface{}) {
-	log.Warn().Msg(m(msg))
+func (l *Logger) Warnf(format string, v ...interface{}) {
+	l.core.Warn().Msgf(format, v...)
 }
 
-func Warnf(format string, v ...interface{}) {
-	log.Warn().Msgf(format, v...)
+func (l *Logger) Info(msg interface{}) {
+	l.core.Info().Msg(m(msg))
 }
 
-func Info(msg interface{}) {
-	log.Info().Msg(m(msg))
+func (l *Logger) Infof(format string, v ...interface{}) {
+	l.core.Info().Msgf(format, v...)
 }
 
-func Infof(format string, v ...interface{}) {
-	log.Info().Msgf(format, v...)
+func (l *Logger) Debug(msg interface{}) {
+	l.core.Debug().Msg(m(msg))
 }
 
-func Debug(msg interface{}) {
-	log.Debug().Msg(m(msg))
+func (l *Logger) Debugf(format string, v ...interface{}) {
+	l.core.Debug().Msgf(format, v...)
 }
 
-func Debugf(format string, v ...interface{}) {
-	log.Debug().Msgf(format, v...)
+func (l *Logger) Trace(msg interface{}) {
+	l.core.Trace().Msg(m(msg))
 }
 
-func Trace(msg interface{}) {
-	log.Trace().Msg(m(msg))
-}
-
-func Tracef(format string, v ...interface{}) {
-	log.Trace().Msgf(format, v...)
+func (l *Logger) Tracef(format string, v ...interface{}) {
+	l.core.Trace().Msgf(format, v...)
 }
