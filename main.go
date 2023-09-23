@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	sl "log"
 	"os"
 )
 
@@ -47,9 +46,7 @@ func (l *Logger) Errorf(format string, v ...interface{}) {
 }
 
 func (l *Logger) Warn(msg interface{}) {
-	//l.core.Warn().Msg(m(msg))
-	newL := sl.New(os.Stdout, "Binance: ", sl.Lshortfile|sl.Ldate|sl.Ltime|sl.LUTC)
-	newL.Printf("WARN: %v", msg)
+	l.core.Warn().Msg(m(msg))
 }
 
 func (l *Logger) Warnf(format string, v ...interface{}) {
